@@ -1,38 +1,24 @@
-def heapify(arr, n, i):
-    largest = i  # Инициализируем наибольший элемент как корень
-    left = 2 * i + 1  # левый = 2*i + 1
-    right = 2 * i + 2  # правый = 2*i + 2
+def linear_search(arr, target):
+    # Проходим по всем элементам массива
+    for i in range(len(arr)):
+        # Если нашли искомый элемент
+        if arr[i] == target:
+            return i  # Возвращаем индекс найденного элемента
+    return -1  # Возвращаем -1, если элемент не найден
 
-    # Проверяем существует ли левый дочерний элемент больший, чем корень
-    if left < n and arr[i] < arr[left]:
-        largest = left
+def main():
+    # Создаем массив
+    array = [3, 5, 2, 7, 9, 1, 4]
+    target = 7  # Искомое значение
 
-    # Проверяем существует ли правый дочерний элемент больший, чем корень
-    if right < n and arr[largest] < arr[right]:
-        largest = right
+    # Вызываем функцию поиска
+    result = linear_search(array, target)
 
-    # Меняем корень, если нужно
-    if largest != i:
-        arr[i], arr[largest] = arr[largest], arr[i]  # своп
-        # Рекурсивно применяем heapify к затронутому поддереву
-        heapify(arr, n, largest)
+    # Выводим результат
+    if result != -1:
+        print(f"Элемент найден на позиции: {result}")
+    else:
+        print("Элемент не найден")
 
-
-def heap_sort(arr):
-    n = len(arr)
-    # Построение max-heap.
-    for i in range(n // 2 - 1, -1, -1):
-        heapify(arr, n, i)
-
-    # Один за другим извлекаем элементы
-    for i in range(n - 1, 0, -1):
-        arr[i], arr[0] = arr[0], arr[i]  # меняем корень с последним элементом
-        heapify(arr, i, 0)
-
-
-# Пример использования:
 if __name__ == "__main__":
-    arr = [12, 11, 13, 5, 6, 7]
-    print("Исходный массив:", arr)
-    heap_sort(arr)
-    print("Отсортированный массив:", arr)
+    main()
